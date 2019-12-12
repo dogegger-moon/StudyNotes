@@ -1,0 +1,22 @@
+//先给一个盒子滚动时间
+    <div className="section" 
+       onScroll = {this.onScroll}
+    >
+        </div>
+   
+   //然后当他滚动的时候给存储它的位置
+   onScroll = (e) => {
+      localStorage.setItem("scroll",e.target.scrollTop)
+   }
+   
+  // 然后在componentDidMount（）里判断上次关掉页面是否有过滚动
+   //如果有请求数据那么判断要卸载数据请求成功里
+   componentDidMount（）{
+   //获取那个盒子结点
+         let sec = document.querySelector('.section')
+    //判断是否有滚动事件                
+    if(localStorage.getItem('scroll')){
+     sec.scrollTop = localStorage.getItem('scroll')
+    }
+   
+   }

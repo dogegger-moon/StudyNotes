@@ -1,0 +1,63 @@
+//react porxy 只代理一个
+//修改package.json文件
+//新增
+
+"proxy":"http://172.19.5.35:9536",
+
+
+// react porxy 代理多个
+
+https://create-react-app.dev/docs/getting-started/
+
+npm i http-proxy-middleware -D
+
+https://create-react-app.dev/docs/proxying-api-requests-in-development/#docsNav
+
+const proxy = require('http-proxy-middleware');
+
+module.exports = function(app) {
+  // ...You can now register proxies as you wish!
+  app.use(proxy('/api', { //名字（自己定义）
+    target: 'http://172.19.5.35:9536',//跨域路径
+    secure: false,
+    changeOrigin: true,
+    pathRewrite: {
+     "^/api": "/"
+    },
+   }));
+   app.use(proxy('/apc', { //名字（自己定义）
+    target: 'http://172.19.5.34:9531',//跨域路径
+    secure: false,
+    changeOrigin: true,
+    pathRewrite: {
+     "^/apc": "/"
+    },
+   }));
+  //app.use(proxy('/apc', { target: 'http://172.19.5.34:9531' }));
+};
+
+
+
+
+
+pay.js
+
+import fetch from '../utils/request'
+// 1根据订单id获取订单信息
+export function getOrderById( data) {
+  return fetch({
+   // baseURL:"http://172.19.5.34:9531",
+   // url: '/getOrderById',
+    url: '/apc/getOrderById',
+    method: 'post',
+    data,
+  })
+}
+// 2.获取商户支持的支付方式
+export function queryByOwenerIdAndOwnerType( params) {
+  return fetch({
+    url: '/api/productSubscribe/queryByOwenerIdAndOwnerType',
+    method: 'get',
+    params,
+  })
+}
