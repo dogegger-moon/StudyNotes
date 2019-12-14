@@ -1,9 +1,23 @@
 import React from 'react'
 import Masonry from 'masonry-layout'
 import InfiniteScroll from 'react-infinite-scroller'
+import imagesLoaded from 'imagesloaded'
 import axios from 'axios'
 import cs from 'classnames'
 import './styles.less'
+
+const arr = [
+  // 'https://www.baidu.com/link?url=5v5Usz6yi2Yxtw0s7peMfok3NdV_Ws8dL4J5YFSt6vgWQX6dZ1tnXY2VofcFrLqAc_ePMqmpuQB_GfccVRL0G5fWdQlhU605ObjS2Gup46mfOdQEEXADCxRD-uwVKMbV-5gyDRsWVifAjpS6Rtk-VYmg6ELgsa56i280ibJ6I_LphZf2oO5OWg3FIy5pNik9qhzSAHeVgDcAuiMRzK3S0-2E7yPUfy8RNcTtBmkec7yA7kUBR5AFo9Bqow5MXU3OV5B1ZMHzZoUWW7Gzc9PaAal5nHCXLQcOSfIx0QyBK5B0R_Sq5wTVbsGxBO-ujurQPMg7jknJ6PwrDkPGiTSDqwlQrOKYmTfjJ3UxVvz3Xobrm10Z_rCG6Nn97pCWQZ-lpKiXGWsdYrDdxnEWJX-hZwE1znDa8_s_lO8jWZdqty1Oq-TeXiHT9aqPvKf5UB9ntWQbDszu5HJZq8JOSyoPiGZ2Th3f5pHP1G3zUl89YRBbY_camqx12CBV3kc7VEOdQ6pVQ5frfhJRMmFT3R4Ym_&wd=&eqid=b87ddf8f000e6d49000000025df42c3e',
+  // 'https://www.baidu.com/link?url=YKhfddJn0zTx3f_s2SBCnyQ2rDadsqme6qk1owCqrGNUZ4jIxV8yl7EZkZI1_VjyE2oyVYu6S12IR06Ck3dJB7b5nevWlQKzZo8qXaBTS4WTB6KbKm3rdrA4r0cq_zOVUEDQ96tgZ7NMOQnUw6d63mIhaGDBeUO2sL9saU5vuohGXXqHjs45dUpTfhr9HHreQYzmMp-0DPexmb4rLvJJ6YrlXAtYf90j-6t5SVC-npYT7VH1ohGdMp5UhG4HvganDXCRKoJk5pKTDd5tXpPop67xfP9uiFJMYCYuKeyXn6LKHdTIOuAQMv9rp1WISTbs8jsMutZleBjxIBXCuliTbqnaQB5YC60g5fHRugrqPBnqCVo-Ge-kpiMrRnQKLjTUB0QIFLDMrx1y2VeuJqNLMXdPwmtnlRq8j1mXzsvq26cberYRCmYEAGOET6Z6Hl7bRZBvO5qeArF0ZoVI4mCeiauy_3ynfAnUc_XmKoeYNkNfz2vqvWKsEzjRQEOkTwck-UtUUC07IMEqH8Y_JrsFmnEfYmB71VrW4OxzRL6NIcFXljdh14P_4P8a4sAVSZTM&wd=&eqid=b87ddf8f000e6d49000000025df42c3e',
+  // 'https://www.baidu.com/link?url=5xUUR6tCBKgGi19g5XYJLDtzh6YyhXw1JyM5pPBSS4RfJRsVqrY2MVrtto6r2YThJSrNBQJXgjuQ6eY3TljbaA6sptzzYYW9hPafrPPfj14yv3CxQdTv3dcnIDF3J0zj8Nv9BGT3cgkChznYDswaen4WbHv-FEgh7Po9S0gpyZ5JR3V8P3FVAZEq_OLul_XTMwqQ1xxrDi149_4Ih9OBhA6G14cVUKs5e-Plo4fonetNvLi9Ue31dU7gdb2junyVkL13sVafcRkcnz8atnkbyQRE0pg8vmvP8th2bkrQUFMzL0RZRdq-PXHO1orQ0S0wPS1PFnmNulTn2Ph-4mf4_Jl-QeHaQ47QfO5ltA8cK44Qs0LbCTh4R75Mx2vnvdkPNwprkAI4QnNiNry26IDXMwK3w5Csm9yoZ12s00oBMLZVTifJiJs0XF1npc_8R7dyvsUrDOKC1ZbUovb8h__JWGjw296fOnCh16uhllsKCslTVMtlRU9JEij1OJ7wHCQyaT1SianzLRrnfc4zpxviha&wd=&eqid=b87ddf8f000e6d49000000025df42c3e',
+  'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3008142408,2229729459&fm=26&gp=0.jpg',
+  'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3437217665,1564280326&fm=26&gp=0.jpg',
+  'https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2458227883,4095122505&fm=26&gp=0.jpg',
+  'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1761250919,1896060533&fm=26&gp=0.jpg',
+  'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2852083094,372235004&fm=26&gp=0.jpg',
+  'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2944705163,3932100810&fm=26&gp=0.jpg',
+  'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3104686528,572431609&fm=26&gp=0.jpg',
+]
 
 // columnWidth: 200,
 // itemSelector: '.grid-item' // 要布局的网格元素
@@ -28,8 +42,17 @@ export default class extends React.PureComponent {
       data: [], // 接受我每次的数据
       count: 0,
     }
-    // 拿第一次的数据
+    
     this.loadMoreData()
+  }
+
+  imagesOnload = () => {
+    const elLoad = imagesLoaded('.pages-hoc')
+    elLoad.on('always', () => {
+      // 图片加载后执行的方法
+      // 拿第一次的数据
+      this.advanceWidth()
+    })
   }
 
   advanceWidth = () => {
@@ -55,10 +78,10 @@ export default class extends React.PureComponent {
     axios.post('/api/Home/Apis/listWithPage', { data: { page, limit: 10 } })
       .then(res => {
         this.setState({
-          data: [...data, ...res.data.result.list],
+          data: [...data, ...arr],
           count: res.count,
         }, () => {
-          this.advanceWidth()
+          this.imagesOnload()
         })
       })
       .catch(err => console.log(err))
@@ -78,11 +101,12 @@ export default class extends React.PureComponent {
         >
           <div className="pages-hoc">
             {
-              this.state.data.map((dt, key) => (
+              this.state.data.map((value, key) => (
                 <div 
                   key={key} 
                   className={cs('d', {d1: key%2 === 0, d2: key%2 !== 0})}
                 >
+                  <img src={value} key={key} />
                 </div>
               ))
             }
@@ -93,4 +117,58 @@ export default class extends React.PureComponent {
   }
 }
 
- 
+
+
+
+
+imagesloaded.js
+
+
+import React from 'react'
+import imagesLoaded from 'imagesloaded'
+
+const arr = [
+  'https://www.baidu.com3333/link?url=5v5Usz6yi2Yxtw0s7peMfok3NdV_Ws8dL4J5YFSt6vgWQX6dZ1tnXY2VofcFrLqAc_ePMqmpuQB_GfccVRL0G5fWdQlhU605ObjS2Gup46mfOdQEEXADCxRD-uwVKMbV-5gyDRsWVifAjpS6Rtk-VYmg6ELgsa56i280ibJ6I_LphZf2oO5OWg3FIy5pNik9qhzSAHeVgDcAuiMRzK3S0-2E7yPUfy8RNcTtBmkec7yA7kUBR5AFo9Bqow5MXU3OV5B1ZMHzZoUWW7Gzc9PaAal5nHCXLQcOSfIx0QyBK5B0R_Sq5wTVbsGxBO-ujurQPMg7jknJ6PwrDkPGiTSDqwlQrOKYmTfjJ3UxVvz3Xobrm10Z_rCG6Nn97pCWQZ-lpKiXGWsdYrDdxnEWJX-hZwE1znDa8_s_lO8jWZdqty1Oq-TeXiHT9aqPvKf5UB9ntWQbDszu5HJZq8JOSyoPiGZ2Th3f5pHP1G3zUl89YRBbY_camqx12CBV3kc7VEOdQ6pVQ5frfhJRMmFT3R4Ym_&wd=&eqid=b87ddf8f000e6d49000000025df42c3e',
+  // 'https://www.baidu.com/link?url=YKhfddJn0zTx3f_s2SBCnyQ2rDadsqme6qk1owCqrGNUZ4jIxV8yl7EZkZI1_VjyE2oyVYu6S12IR06Ck3dJB7b5nevWlQKzZo8qXaBTS4WTB6KbKm3rdrA4r0cq_zOVUEDQ96tgZ7NMOQnUw6d63mIhaGDBeUO2sL9saU5vuohGXXqHjs45dUpTfhr9HHreQYzmMp-0DPexmb4rLvJJ6YrlXAtYf90j-6t5SVC-npYT7VH1ohGdMp5UhG4HvganDXCRKoJk5pKTDd5tXpPop67xfP9uiFJMYCYuKeyXn6LKHdTIOuAQMv9rp1WISTbs8jsMutZleBjxIBXCuliTbqnaQB5YC60g5fHRugrqPBnqCVo-Ge-kpiMrRnQKLjTUB0QIFLDMrx1y2VeuJqNLMXdPwmtnlRq8j1mXzsvq26cberYRCmYEAGOET6Z6Hl7bRZBvO5qeArF0ZoVI4mCeiauy_3ynfAnUc_XmKoeYNkNfz2vqvWKsEzjRQEOkTwck-UtUUC07IMEqH8Y_JrsFmnEfYmB71VrW4OxzRL6NIcFXljdh14P_4P8a4sAVSZTM&wd=&eqid=b87ddf8f000e6d49000000025df42c3e',
+  // 'https://www.baidu.com/link?url=5xUUR6tCBKgGi19g5XYJLDtzh6YyhXw1JyM5pPBSS4RfJRsVqrY2MVrtto6r2YThJSrNBQJXgjuQ6eY3TljbaA6sptzzYYW9hPafrPPfj14yv3CxQdTv3dcnIDF3J0zj8Nv9BGT3cgkChznYDswaen4WbHv-FEgh7Po9S0gpyZ5JR3V8P3FVAZEq_OLul_XTMwqQ1xxrDi149_4Ih9OBhA6G14cVUKs5e-Plo4fonetNvLi9Ue31dU7gdb2junyVkL13sVafcRkcnz8atnkbyQRE0pg8vmvP8th2bkrQUFMzL0RZRdq-PXHO1orQ0S0wPS1PFnmNulTn2Ph-4mf4_Jl-QeHaQ47QfO5ltA8cK44Qs0LbCTh4R75Mx2vnvdkPNwprkAI4QnNiNry26IDXMwK3w5Csm9yoZ12s00oBMLZVTifJiJs0XF1npc_8R7dyvsUrDOKC1ZbUovb8h__JWGjw296fOnCh16uhllsKCslTVMtlRU9JEij1OJ7wHCQyaT1SianzLRrnfc4zpxviha&wd=&eqid=b87ddf8f000e6d49000000025df42c3e',
+  'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3008142408,2229729459&fm=26&gp=0.jpg',
+  'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3437217665,1564280326&fm=26&gp=0.jpg',
+  'https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2458227883,4095122505&fm=26&gp=0.jpg',
+  'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1761250919,1896060533&fm=26&gp=0.jpg',
+  'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2852083094,372235004&fm=26&gp=0.jpg',
+  'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2944705163,3932100810&fm=26&gp=0.jpg',
+  'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3104686528,572431609&fm=26&gp=0.jpg',
+]
+
+export default class extends React.PureComponent {
+  componentDidMount () {
+    const elLoad = imagesLoaded('.pages-images')
+    elLoad.on( 'always', () => {
+      // 图片加载后执行的方法
+      console.log('图片加载完成')
+    } )
+    elLoad.on( 'done', () => {
+      // 图片加载后执行的方法
+      console.log('图片加载成功')
+    } )
+    elLoad.on( 'fail', option => {
+      // 图片加载后执行的方法
+      console.log('图片加载失败', option)
+    } )
+  }
+
+  render () {
+    return (
+      <div className="pages-images">
+        {
+          arr.map((value, key) => {
+            return <img src={value} key={key} />
+          })
+        }
+      </div>
+    )
+  }
+}
+
+
+
