@@ -74,3 +74,11 @@ export function get (url, payload = {}) {
       })
   })
 }
+
+//路由拦截里面添加参数
+        // config.data = { ...config.data.data, key: '5d2878270550ac239657ffa54edd96ff' }
+        // config.headers = { ...config.headers, key: '5d2878270550ac239657ffa54edd96ff' }
+
+        headers: {
+           key: '5d2878270550ac239657ffa54edd96ff',
+        }
