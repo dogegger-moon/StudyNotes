@@ -19,3 +19,5 @@ export default (loader, loading = loadingComponent) => {
         loading
     })
 }
+
+//const xxx = loadable(() => import('../pages/xxx/xxx))
