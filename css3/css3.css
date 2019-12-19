@@ -1,0 +1,36 @@
+/*界面，下拉列表箭头样式：*/
+	padding:7px;
+	width:60px;
+	font-family:华文宋体;
+	outline:none;
+	font-weight:400;
+	font-size:12px;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	border:0px;
+	background: url(images/13.jpg) no-repeat right center;
+
+
+/*手机端禁止用户操作屏幕：  user-scalable=no*/
+
+
+xx{
+  width: 100%;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+//文本溢出  //一行   // 容器要有宽度   显示...
+
+xx{
+    width: 200px;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 3; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/
+}   
+
+//两行或多行文本溢出   显示...
