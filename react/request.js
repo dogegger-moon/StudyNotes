@@ -24,6 +24,22 @@ axios.interceptors.request.use(config => {
   })
   return config
 }, error => {
+switch (error.response && error.response.status) {
+  case 504: 
+    message.warning('后台错误')
+    break;
+  case 404:
+    message.warning('未找到')
+    //setTimeout(() => {
+    //  window.location.href='http://www.baidu.com'
+    //}, 2000)
+    break;
+    
+    default:
+      break;
+  
+}
+  
   return Promise.reject(error)
 })
 
