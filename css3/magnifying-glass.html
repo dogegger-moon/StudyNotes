@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>放大镜</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.wrap{
+			margin: 0 auto;width: 900px;height: 600px;
+			position: relative;border: 1px solid #ccc;
+		}
+		.zuo{
+			border: 1px solid #000;width: 400px;height: 400px;
+			float: left;margin: 0 30px 0 0;position: relative;
+		}
+		.zuo img{width: 400px;height: 400px;}
+		.big{width: auto;height: auto;}
+		.you{
+			border: 1px solid #000;width: 400px;height: 400px;
+			float: left;overflow: hidden;position: relative;
+		}
+		.you img{
+			display: block;
+			width: 800px;height: 800px;
+			position: absolute;top: 0;left: 0;
+		}
+		.little{
+			width: 1000px;height: 200px;
+			position: absolute;bottom: -20px;left: 50px;
+		}
+		.little img{
+			display: block;width: 150px;height: 150px;
+			opacity: 0.2;float: left;margin-right: 15px;
+		}
+		.zuo>p{
+			width: 200px;height: 200px;
+			background: blue;opacity:0.3;
+			z-index: 100;position: absolute;
+			/*top: 100px;left: 100px;*/display: none;
+		}
+		.little .on{opacity:1;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="big">
+			<div class="zuo">
+				<p id="mark"></p>
+				<img src="img/1.jpg" alt="">
+			</div>
+			<div class="you">
+				<img src="img/1.jpg" alt="">
+			</div>
+		</div>
+		<div class="little">
+			<img src="img/1.jpg" alt="" class="on">
+			<img src="img/2.jpg" alt="">
+			<img src="img/3.jpg" alt="">
+			<img src="img/4.jpg" alt="">
+			<img src="img/5.jpg" alt="">
+		</div>
+	</div> 
+	<script type="text/javascript">
+		let imgs=document.getElementsByClassName("little")[0].getElementsByTagName("img"),
+			mark=document.getElementById("mark"),
+			wrap=document.getElementsByClassName("wrap")[0],
+			zuo=document.getElementsByClassName("zuo")[0],
+			you=document.getElementsByClassName("you")[0],
+			zuoImg=zuo.getElementsByTagName("img")[0],
+			youImg=you.getElementsByTagName("img")[0];
+		console.log(youImg)
+		
+		//设置鼠标移入移出事件
+		zuo.onmouseover=function(){
+			mark.style.display="block"
+		}
+		zuo.onmouseout=function(){
+			mark.style.display="none"
+		}
+		//鼠标事件的封装调用
+		zuo.onmousemove=function(e){
+			//从新定位0点坐标
+			/*console.log(e.pageX)*/
+			var X=e.pageX-wrap.offsetLeft-mark.offsetWidth/2;
+			var Y=e.pageY-wrap.offsetTop-mark.offsetHeight/2;
+			console.log(X,Y)
+			//
+			var right=zuo.offsetWidth-mark.offsetWidth;
+			var bottom=zuo.offsetHeight-mark.offsetHeight;
+			//获取最小值
+			X=X<0?0:X;
+			Y=Y<0?0:Y;
+			//获取最大值
+			X=X>right?right:X;
+			Y=Y>bottom?bottom:Y;
+			//
+			mark.style.top=Y+"px"
+			mark.style.left=X+"px"
+			youImg.style.left=-X*2+"px"
+			youImg.style.top=-Y*2+"px"
+		}
+		
+		//修改图片路径
+		for(let i=0;i<imgs.length;i++){
+			imgs[i].onclick=function(){
+				for(let j=0;j<imgs.length;j++){
+					imgs[j].className=""
+				}
+				this.className="on"
+				zuoImg.src=this.src
+				youImg.src=this.src
+			}
+		}
+		
+	</script>
+</body>
+</html>
