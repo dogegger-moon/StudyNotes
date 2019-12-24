@@ -1,1 +1,18 @@
 react
+
+@Form.create({
+    name: 'global_state',
+    mapPropsToFields(props) {
+      return {
+        name: Form.createFormField({
+          value: props.xgData.name,
+        }),
+        age: Form.createFormField({
+            value: props.xgData.age,
+        }),
+        address: Form.createFormField({
+            value: props.xgData.address,
+        }),
+      };
+    }
+  })
