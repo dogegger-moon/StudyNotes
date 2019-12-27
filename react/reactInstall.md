@@ -18,11 +18,11 @@ npm install --save react-router-dom
 react-router-config
 npm i eject -S
 *如果报错：
-git init 
-git add .
-git commit -m 'add'
-再运行:
-npm run eject*  
+git init   
+git add .  
+git commit -m 'add'  
+再运行:  
+npm run eject*   
 npm install --save react-router-config  
 
 axios
