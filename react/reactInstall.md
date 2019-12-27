@@ -32,7 +32,7 @@ Ant Design
 npm install antd --save  
 npm install antd-mobile --save  
 引入样式:  
-`import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'`
+`import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'`  
 `import 'antd-mobile/dist/antd-mobile.css';  // or 'antd-mobile/dist/antd-mobile.less'`
 （只需引入一次）  
 
@@ -48,17 +48,17 @@ npm i @babel/plugin-proposal-decorators --save-dev
 
 Echarts
 =
-npm install --save echarts-for-react
+npm install --save echarts-for-react  
 npm install echarts --save //如果有报错找不到echarts模块，需要在安装一下exharts'  
 
 Rudex
 =
 
-npm i redux -S
-npm i redux-persist -S
-npm i react-redux -S
-npm i redux-promise -S
-npm i redux-thunk -S
+npm i redux -S  
+npm i redux-persist -S  
+npm i react-redux -S  
+npm i redux-promise -S  
+npm i redux-thunk -S  
 npm i redux-saga -S  
 
 Less
@@ -103,8 +103,8 @@ package配置
 
 
 @路径配置:  
-配置config/webpack.config.js
-319//
+配置config/webpack.config.js  
+319//  
 ```
 '@': path.resolve(__dirname, '../src'),
 '@@': path.resolve(__dirname, '../src/component')  
@@ -121,22 +121,23 @@ package配置
 
 
 
- npx create-react-app 你的项目名 或者 create-react-app 你的项目名
-        2. cnpm i
-        3. git add .
-        4. git commit -m 'xm'
-        5. npm run eject
-        6. cnpm i axios qs classnames react-router-dom redux-promise redux-thunk -S
-        7. cnpm i redux react-redux less less-loader shortid redux-persist -S
-        8. cnpm i react-router-config -S (需要使用新路由的同学装，不使用的跳过)
-        9. cnpm i @babel/plugin-proposal-decorators --save-dev
-        10. cnpm i babel-plugin-syntax-dynamic-import -D
-        11. cnpm i antd-mobile --save (移动端项目装)
-        12. cnpm i antd -S (PC端项目装)
-        13. cnpm i react-lazyload -S
-        14. cnpm i react-loadable -S
-        15. cnpm i http-proxy-middleware -D
-        16. 替换 package.json文件
+ npx create-react-app 你的项目名 或者 create-react-app 你的项目名  
+        2. cnpm i  
+        3. git add .  
+        4. git commit -m 'xm'  
+        5. npm run eject  
+        6. cnpm i axios qs classnames react-router-dom redux-promise redux-thunk -S  
+        7. cnpm i redux react-redux less less-loader shortid redux-persist -S  
+        8. cnpm i react-router-config -S (需要使用新路由的同学装，不使用的跳过)  
+        9. cnpm i @babel/plugin-proposal-decorators --save-dev  
+        10. cnpm i babel-plugin-syntax-dynamic-import -D  
+        11. cnpm i antd-mobile --save (移动端项目装)   
+        12. cnpm i antd -S (PC端项目装)  
+        13. cnpm i react-lazyload -S  
+        14. cnpm i react-loadable -S  
+        15. cnpm i http-proxy-middleware -D  
+        16. 替换 package.json文件  
+        ```
         "babel": {
           "presets": [
             "react-app"
@@ -151,3 +152,4 @@ package配置
             "syntax-dynamic-import"
           ]
         }
+        ```
