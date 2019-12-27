@@ -29,20 +29,20 @@ npm i axios -S
 
 Ant Design
 =
-npm install antd --save
-npm install antd-mobile --save
-引入样式：
+npm install antd --save  
+npm install antd-mobile --save  
+引入样式:  
 `import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'`
 `import 'antd-mobile/dist/antd-mobile.css';  // or 'antd-mobile/dist/antd-mobile.less'`
 （只需引入一次）  
 
 methods
 =
-react-pullload
-react-infinite-scroller
-react-lazyload
-react-loadable
-npm i http-proxy-middleware -D
+react-pullload  
+react-infinite-scroller  
+react-lazyload  
+react-loadable  
+npm i http-proxy-middleware -D  
 npm i @babel/plugin-proposal-decorators --save-dev  
 
 
