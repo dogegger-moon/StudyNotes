@@ -7,60 +7,68 @@
 
 create-react-app my-app
 router
-npm install --save react-router-dom
+=
+npm install --save react-router-dom  
 
-//如果报错 清除缓存  npm cache clean -f
+*//如果报错 清除缓存  npm cache clean -f*  
+
 
 react-router-config
 npm i eject -S
-如果报错：
+*如果报错：
 git init 
 git add .
 git commit -m 'add'
 再运行:
-npm run eject
-npm install --save react-router-config
-
-
+npm run eject*  
+npm install --save react-router-config  
 
 axios
-npm i axios -S
+=
+npm i axios -S  
 
 Ant Design
+=
 npm install antd --save
 npm install antd-mobile --save
 引入样式：
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import 'antd-mobile/dist/antd-mobile.css';  // or 'antd-mobile/dist/antd-mobile.less'
-（只需引入一次）
+`import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'`
+`import 'antd-mobile/dist/antd-mobile.css';  // or 'antd-mobile/dist/antd-mobile.less'`
+（只需引入一次）  
 
+methods
+=
 react-pullload
 react-infinite-scroller
 react-lazyload
 react-loadable
 npm i http-proxy-middleware -D
-npm i @babel/plugin-proposal-decorators --save-dev
+npm i @babel/plugin-proposal-decorators --save-dev  
 
 
 Echarts
+=
 npm install --save echarts-for-react
-npm install echarts --save //如果有报错找不到echarts模块，需要在安装一下exharts'
+npm install echarts --save //如果有报错找不到echarts模块，需要在安装一下exharts'  
 
 Rudex
+=
 
 npm i redux -S
 npm i redux-persist -S
 npm i react-redux -S
 npm i redux-promise -S
 npm i redux-thunk -S
-npm i redux-saga -S
+npm i redux-saga -S  
 
 Less
+=
 
-npm i less less-loader -S
+npm i less less-loader -S  
 
 配置config/webpack.config.js
-
+=
+```
 const cssRegex = /\.(css|less)$/;
 
 {
@@ -70,10 +78,12 @@ const cssRegex = /\.(css|less)$/;
        javascriptEnabled: true,
     },
 },
+```  
 
 
 
-package配置
+package配置  
+```
 "babel": {
   "presets": [
     "react-app"
@@ -88,14 +98,17 @@ package配置
     "syntax-dynamic-import"
   ]
 }
+```  
 
 
 
-@路径配置:
+@路径配置:  
 配置config/webpack.config.js
 319//
+```
 '@': path.resolve(__dirname, '../src'),
-'@@': path.resolve(__dirname, '../src/component')
+'@@': path.resolve(__dirname, '../src/component')  
+```   
 
 
 
