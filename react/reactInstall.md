@@ -4,8 +4,10 @@
 
 
 
-
+脚手架：
+=
 create-react-app my-app
+
 router
 =
 npm install --save react-router-dom  
